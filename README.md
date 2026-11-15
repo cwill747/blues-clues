@@ -27,9 +27,26 @@ An illustrated-in-words **How to play** introduction appears on first launch. Ta
 - **Offline support** after the app has loaded and cached successfully.
 - **No accounts, advertisements, backend, or analytics.**
 
-## Install on iPhone or iPad
+## Install on your phone
 
-Open [the game](https://cwill747.github.io/blues-clues/) in Safari, tap **Share**, then **Add to Home Screen**. Launch it from the new icon for an app-like experience.
+The game can be added to your Home Screen like an app. Once it has loaded and cached successfully, it can also work offline.
+
+### iPhone or iPad (Safari)
+
+1. Open [Blue's Clues at Home](https://cwill747.github.io/blues-clues/) in **Safari**.
+2. Tap the **Share** button (square with an upward arrow).
+3. Scroll down and select **Add to Home Screen**. Depending on your iOS version, you may need to open **More**.
+4. Tap **Add**. If an **Open as Web App** option appears, keep it enabled.
+5. Tap the **Blue's Clues** icon on your Home Screen to play.
+
+### Android (Chrome)
+
+1. Open [Blue's Clues at Home](https://cwill747.github.io/blues-clues/) in **Chrome**.
+2. Tap the **⋮** menu next to the address bar.
+3. Select **Install app** or **Add to Home screen**, then confirm.
+4. Launch the game from the new Home Screen icon.
+
+You can find these instructions inside the app at any time by tapping **ⓘ How to play**.
 
 ## Privacy and storage
 
