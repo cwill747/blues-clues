@@ -1,13 +1,48 @@
-# Blue's Clues at Home
+# 🐾 Blue's Clues at Home
 
-A lightweight offline-capable PWA for parent-led scavenger hunts.
+A playful, parent-led scavenger hunt inspired by the classic three-clue mystery game. Turn everyday household objects into clues and help little detectives solve 100 mysteries.
 
-## Publish with GitHub Pages
+**[Play the game](https://cwill747.github.io/blues-clues/)**
 
-In repository Settings → Pages, select **Deploy from a branch**, branch **main**, folder **/(root)** and Save.
+## How it works
 
-Site: https://cwill747.github.io/blues-clues/
+1. **Choose a mystery.** Each mystery has a question, three objects to use as clues, and a secret answer.
+2. **Set up the hunt.** A grown-up draws or cuts out three blue paw prints and hides one on each clue object. A quick sketch can stand in for an object you don't have.
+3. **Start playing.** Tap **Done hiding** to switch from parent setup to child-friendly play mode.
+4. **Find the clues.** Search the house together and tap each clue in the app when discovered.
+5. **Think it through.** Once all three clues are found, talk about what they mean and reveal the answer.
+6. **Celebrate.** Mark the mystery complete and pick another one.
 
-On iOS open the URL in Safari, tap Share, then **Add to Home Screen**. Offline play is available after the first successful visit.
+An illustrated-in-words **How to play** introduction appears on first launch. Tap **ⓘ How to play** at any time to see it again.
 
-No build or backend required.
+## Features
+
+- **100 ready-to-play mysteries**, built around common toys, household objects, pretend play, snacks, and activities.
+- **Parent setup mode** shows the objects and secret answer before the hunt.
+- **Child-friendly play mode** hides the clues until they're discovered.
+- **Completion tracking** shows how many mysteries you've finished and lets you undo a completed mystery.
+- **Random mystery** prioritizes unfinished games.
+- **Saved progress** via browser `localStorage` on the current device.
+- **Installable PWA** with standalone display and a home-screen icon.
+- **Offline support** after the app has loaded and cached successfully.
+- **No accounts, advertisements, backend, or analytics.**
+
+## Install on iPhone or iPad
+
+Open [the game](https://cwill747.github.io/blues-clues/) in Safari, tap **Share**, then **Add to Home Screen**. Launch it from the new icon for an app-like experience.
+
+## Privacy and storage
+
+Completed mysteries and whether the introduction has been dismissed are stored only in the browser's local storage. Progress does not sync across devices. Clearing website data or removing the installed app may erase saved progress.
+
+## Technology
+
+A dependency-free static website using HTML, CSS, and vanilla JavaScript. A web app manifest enables installation, and a service worker caches the application for offline use. Hosted on GitHub Pages.
+
+## Contributing
+
+Ideas for new mysteries, improvements to clues, accessibility fixes, and bug reports are welcome via GitHub issues and pull requests.
+
+## Disclaimer
+
+This is an independent, unofficial fan-made activity and is not affiliated with or endorsed by the owners of Blue's Clues.
