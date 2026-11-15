@@ -4,6 +4,10 @@ A playful, parent-led scavenger hunt inspired by the classic three-clue mystery 
 
 **[Play the game](https://cwill747.github.io/blues-clues/)**
 
+## Printable paw prints
+
+**[Download the one-page PDF with three blue paw prints](./paw-prints.pdf)**. Print it on US Letter paper, cut out the three paw prints, and place them on clue objects around the house. Reuse the prints for every mystery. The same PDF is linked from the in-app **How to play** screen.
+
 ## How it works
 
 1. **Choose a mystery.** Each mystery has a question, three objects to use as clues, and a secret answer.
