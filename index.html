@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#2676dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Blue's Clues"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon.svg" type="image/svg+xml"><title>Blue's Clues at Home</title><style>
 :root{font-family:system-ui,-apple-system,sans-serif;color:#16304e;background:#f4f9ff}*{box-sizing:border-box}body{margin:0}main{max-width:520px;margin:auto;padding:24px 16px 40px}.card{background:white;border-radius:24px;padding:22px;box-shadow:0 5px 28px #16447b16}.top{display:flex;justify-content:space-between;align-items:center;color:#61758e;font-size:13px;font-weight:700}.pill{border-radius:20px;padding:7px 12px;background:#fff1cf;color:#76500d}.play{background:#d8f8e3;color:#126236}.question{text-align:center;background:#eaf4ff;border-radius:18px;padding:22px 12px;margin:20px 0}.paw{font-size:40px;color:#2676dc}.question h1{font-size:23px;margin:8px 0}.clue{display:flex;gap:16px;align-items:center;padding:17px;background:#f3f8fd;border-radius:14px;margin:10px 0;font-weight:650}.clue .paw{font-size:26px}button{font:inherit;cursor:pointer;border:0;border-radius:14px;padding:14px 17px;font-weight:750;background:#2676dc;color:white}button:disabled{opacity:.35}button.secondary{background:#edf3fa;color:#204d7d}button.ghost{background:transparent;color:#315c8e}.wide{width:100%;margin-top:12px}.clues{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.tile{min-height:118px;background:#eef6ff;color:#16477f;padding:10px 6px;font-size:14px;overflow-wrap:anywhere}.tile.found{background:#dff4e7;color:#135e36}.tile .paw{display:block;font-size:32px;margin-bottom:8px}.nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}.small{color:#667c94;font-size:14px}.answer{text-align:center;padding:20px;font-size:21px;font-weight:750;color:#176338}.center{text-align:center}footer{text-align:center;margin-top:18px}button:focus-visible{outline:3px solid #f4ae31;outline-offset:3px}
-</style></head><body><main><div class="card"><div class="top"><span id="counter"></span><span class="pill" id="status"></span></div><div class="question"><div class="paw">🐾</div><h1 id="question"></h1></div><section id="content"></section><div class="nav"><button class="secondary" id="prev">‹ Previous</button><button class="secondary" id="next">Next mystery ›</button></div><button class="ghost wide" id="random">⇄ Random mystery</button></div><footer class="small">Made for little clue hunters 🐾</footer></main><script>
+</style></head><body><main><div class="card"><div class="top"><span id="counter"></span><span class="pill" id="status"></span></div><div class="question"><div class="paw">🐾</div><h1 id="question"></h1></div><p id="progress" class="small"></p><section id="content"></section><div class="nav"><button class="secondary" id="prev">‹ Previous</button><button class="secondary" id="next">Next mystery ›</button></div><button class="ghost wide" id="random">⇄ Random mystery</button></div><footer class="small">Made for little clue hunters 🐾</footer></main><script>
 const games=[
 ["What does Blue want to eat?","A peanut butter and jelly sandwich",["Bread","Peanut butter jar","Jelly jar"],"All three make something yummy!"],
 ["What does Blue want to play?","Cars!",["Toy car","A wheel","A toy road or ramp"],"What goes vroom?"],
@@ -14,15 +14,103 @@ const games=[
 ["Where does Blue want to sleep?","A bed",["Pillow","Blanket","Stuffed animal"],"Where do these belong?"],
 ["What does Blue want to make?","A drawing",["Crayon","Paper","Coloring book"],"What can we create?"],
 ["What does Blue want to do outside?","Blow bubbles",["Bubble wand","Bubble solution","Picture of a circle"],"What floats in the air?"],
-["What does Blue want to pretend to be?","A firefighter",["Toy fire truck","Something red","Toy helmet or hat"],"Who puts out fires?"]
-];let index=0,hiding=true,found=new Set(),revealed=false;
+["What does Blue want to pretend to be?","A firefighter",["Toy fire truck","Something red","Toy helmet or hat"],"Who puts out fires?"],
+["What does Blue want to do?","Blue wants to brush teeth!",["Toothbrush","Toothpaste","Sink"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to read a book!",["Book","Pillow","Lamp"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to have a picnic!",["Blanket","Basket","Plate"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play soccer!",["Soccer ball","Sneakers","Goal picture"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to make cookies!",["Flour","Bowl","Cookie cutter"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to paint!",["Paintbrush","Paper","Paint"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to go swimming!",["Swimsuit","Towel","Goggles"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to ride a bicycle!",["Helmet","Wheel","Sneakers"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to make music!",["Drum","Shaker","Piano"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to have a tea party!",["Teacup","Teapot","Stuffed animal"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to build train tracks!",["Toy train","Track","Blocks"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to go camping!",["Flashlight","Blanket","Backpack"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to make a snowman!",["Hat","Carrot","Snow picture"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to fly a kite!",["String","Paper kite","Wind picture"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to plant flowers!",["Pot","Seeds","Watering can"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to wash hands!",["Soap","Faucet","Towel"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to get dressed!",["Shirt","Pants","Socks"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to make pizza!",["Cheese","Sauce","Bread"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to eat cereal!",["Cereal","Bowl","Spoon"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to make pancakes!",["Mix","Pan","Spatula"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to have a birthday party!",["Balloon","Hat","Candle"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to go to the beach!",["Bucket","Towel","Sunglasses"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play basketball!",["Basketball","Sneakers","Hoop picture"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play baseball!",["Ball","Bat","Glove"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to go fishing!",["Toy fish","String","Bucket"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to build a bridge!",["Blocks","Toy car","Books"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to make a robot!",["Blocks","Gears","Robot toy"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play doctor!",["Bandage","Stethoscope","Stuffed animal"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play veterinarian!",["Stuffed dog","Bandage","Medical kit"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play grocery store!",["Bag","Toy food","Basket"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play restaurant!",["Plate","Toy food","Napkin"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play school!",["Pencil","Notebook","Backpack"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play astronaut!",["Rocket","Star picture","Helmet"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play pirate!",["Toy boat","Treasure box","Eye patch"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play knight!",["Sword toy","Shield","Castle"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play princess!",["Crown","Fancy shoes","Dress"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play chef!",["Apron","Spoon","Pot"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play builder!",["Hammer toy","Blocks","Hard hat"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play police officer!",["Police car toy","Badge","Hat"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play farmer!",["Tractor toy","Cow toy","Barn"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play pilot!",["Airplane toy","Suitcase","Hat"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play scientist!",["Magnifier","Cup","Notebook"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play hide and seek!",["Blanket","Closet","Stuffed animal"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play tag!",["Sneakers","Open space","Timer"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to do a puzzle!",["Puzzle piece","Puzzle box","Table"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play a board game!",["Dice","Board","Game piece"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play puppets!",["Sock","Stuffed animal","Cardboard box"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to put on a show!",["Microphone toy","Costume","Chair"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to have a dance party!",["Speaker","Scarf","Shoes"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to do yoga!",["Mat","Water bottle","Stretch picture"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to make a fort!",["Blanket","Pillow","Chair"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to have a movie night!",["Remote","Popcorn bowl","Blanket"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to go treasure hunting!",["Map","Toy treasure","Box"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to go on a nature walk!",["Shoes","Leaf","Backpack"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to look at bugs!",["Magnifier","Toy bug","Leaf"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to watch birds!",["Toy bird","Window","Binoculars"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to look at stars!",["Flashlight","Star drawing","Blanket"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to make a rainbow!",["Red crayon","Yellow crayon","Blue crayon"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to draw a house!",["Paper","Crayon","Toy house"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to make a paper airplane!",["Paper","Toy airplane","Folded paper"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to build a rocket!",["Blocks","Astronaut toy","Rocket picture"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to make a necklace!",["Large beads","String","Necklace"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play with stickers!",["Stickers","Paper","Crayon"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to make a card!",["Paper","Crayons","Envelope"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to wrap a present!",["Wrapping paper","Tape","Ribbon"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to clean up toys!",["Toy bin","Blocks","Stuffed animal"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to do laundry!",["Sock","Basket","Shirt"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to sweep the floor!",["Broom","Dustpan","Floor"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to water plants!",["Watering can","Plant","Cup"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to feed a pet!",["Pet bowl","Toy dog","Toy food"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to take a nap!",["Pillow","Blanket","Teddy bear"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to put on pajamas!",["Pajama shirt","Pajama pants","Bed"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play in rain!",["Raincoat","Umbrella","Boots"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to play in snow!",["Mittens","Coat","Boots"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to get ready for sunshine!",["Sunglasses","Hat","Sunscreen"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to pack a suitcase!",["Suitcase","Shirt","Toothbrush"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to go for a car ride!",["Keys","Shoes","Toy car"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to ride a bus!",["Toy bus","Backpack","Bus drawing"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to ride a train!",["Toy train","Ticket drawing","Backpack"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to visit the zoo!",["Lion toy","Elephant toy","Backpack"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to visit the aquarium!",["Fish toy","Shark toy","Water picture"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to visit the library!",["Book","Library card","Bag"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to visit a museum!",["Dinosaur toy","Picture frame","Backpack"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to visit grandparents!",["Family photo","Shoes","Drawing"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to make a smoothie!",["Banana","Cup","Blender"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to eat ice cream!",["Spoon","Bowl","Ice cream toy"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to make lemonade!",["Lemon","Cup","Pitcher"],"What do these clues have in common?"],
+["What does Blue want to do?","Blue wants to have a teddy bear picnic!",["Teddy bear","Blanket","Toy plate"],"What do these clues have in common?"]
+];const STORAGE_KEY="blues-clues-completed-v1";let completed=new Set();try{completed=new Set(JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]"))}catch{}let index=0,hiding=true,found=new Set(),revealed=false;function saveCompleted(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify([...completed]))}catch{}}
 const el=id=>document.getElementById(id);
 function button(text,fn,cls="wide"){let b=document.createElement("button");b.textContent=text;b.className=cls;b.onclick=fn;return b}
 function p(text,cls=""){let n=document.createElement("p");n.className=cls;n.textContent=text;return n}
 function reset(i){index=(i+games.length)%games.length;hiding=true;found=new Set();revealed=false;render()}
-function render(){let [q,a,clues,hint]=games[index],c=el("content");c.replaceChildren();el("counter").textContent="MYSTERY "+(index+1)+" OF "+games.length;el("status").textContent=hiding?"Parent setup":"Let's play!";el("status").className="pill"+(hiding?"":" play");el("question").textContent=q;
+function render(){let [q,a,clues,hint]=games[index],c=el("content");c.replaceChildren();el("counter").textContent="MYSTERY "+(index+1)+" OF "+games.length;el("status").textContent=hiding?"Parent setup":"Let's play!";el("status").className="pill"+(hiding?"":" play");el("question").textContent=q;el("progress").textContent=completed.size+" of "+games.length+" mysteries completed"+(completed.has(index)?" · ✓ This one is done":"");
 if(hiding){c.append(p("Hide a blue paw print on each of these objects:"));clues.forEach(t=>{let d=document.createElement("div");d.className="clue";let s=document.createElement("span");s.className="paw";s.textContent="🐾";d.append(s,document.createTextNode(t));c.append(d)});c.append(p("Secret answer (for the parent):","small"),p(a));c.append(button("✓ Done hiding — start playing!",()=>{hiding=false;render()}))}
-else{c.append(p("Find all three of Blue's Clues!","center"));let grid=document.createElement("div");grid.className="clues";clues.forEach((t,i)=>{let b=button("",()=>{found.has(i)?found.delete(i):found.add(i);render()},"tile"+(found.has(i)?" found":""));let s=document.createElement("span");s.className="paw";s.textContent=found.has(i)?"✓":"🐾";b.append(s,document.createTextNode(found.has(i)?t:"Clue "+(i+1)));b.setAttribute("aria-pressed",found.has(i));grid.append(b)});c.append(grid);if(found.size===3){c.append(p(hint,"center small"));if(revealed)c.append(p("🎉 "+a+" — We figured out Blue's Clues!","answer"));c.append(button(revealed?"Hide answer":"Reveal answer!",()=>{revealed=!revealed;render()}))}c.append(button("Back to parent setup",()=>{hiding=true;render()},"wide secondary"))}el("prev").disabled=index===0}
-el("prev").onclick=()=>reset(index-1);el("next").onclick=()=>reset(index+1);el("random").onclick=()=>reset((index+1+Math.floor(Math.random()*(games.length-1)))%games.length);render();
+else{c.append(p("Find all three of Blue's Clues!","center"));let grid=document.createElement("div");grid.className="clues";clues.forEach((t,i)=>{let b=button("",()=>{found.has(i)?found.delete(i):found.add(i);render()},"tile"+(found.has(i)?" found":""));let s=document.createElement("span");s.className="paw";s.textContent=found.has(i)?"✓":"🐾";b.append(s,document.createTextNode(found.has(i)?t:"Clue "+(i+1)));b.setAttribute("aria-pressed",found.has(i));grid.append(b)});c.append(grid);if(found.size===3){c.append(p(hint,"center small"));if(revealed){c.append(p("🎉 "+a+" — We figured out Blue's Clues!","answer"));c.append(button(completed.has(index)?"✓ Completed — undo":"✓ Mark mystery done",()=>{if(completed.has(index))completed.delete(index);else completed.add(index);saveCompleted();render()}))}c.append(button(revealed?"Hide answer":"Reveal answer!",()=>{revealed=!revealed;render()}))}c.append(button("Back to parent setup",()=>{hiding=true;render()},"wide secondary"))}el("prev").disabled=index===0}
+el("prev").onclick=()=>reset(index-1);el("next").onclick=()=>reset(index+1);el("random").onclick=()=>{let pool=games.map((_,i)=>i).filter(i=>!completed.has(i)&&i!==index);if(!pool.length)pool=games.map((_,i)=>i).filter(i=>i!==index);reset(pool[Math.floor(Math.random()*pool.length)])};render();
 if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
 </script></body></html>
