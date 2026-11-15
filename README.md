@@ -7,20 +7,20 @@ A playful, parent-led scavenger hunt inspired by the classic three-clue mystery 
 ## How it works
 
 1. **Choose a mystery.** Each mystery has a question, three objects to use as clues, and a secret answer.
-2. **Set up the hunt.** A grown-up draws or cuts out three blue paw prints and hides one on each clue object. A quick sketch can stand in for an object you don't have.
+2. **Set up the hunt.** A grown-up draws or cuts out three blue paw prints, puts one on each clue object, and hides them in different spots around the house. A quick sketch can stand in for an object you don't have.
 3. **Start playing.** Tap **Done hiding** to switch from parent setup to child-friendly play mode.
 4. **Find the clues.** Search the house together and tap each clue in the app when discovered.
-5. **Think it through.** Once all three clues are found, talk about what they mean and reveal the answer.
-6. **Celebrate.** Mark the mystery complete and pick another one.
+5. **Think it through.** Once all three clues are found, visit the thinking chair and tap **Solve the mystery!** to reveal the answer.
+6. **Celebrate.** Tap **Finish & next mystery** to save completion and advance in one step.
 
-An illustrated-in-words **How to play** introduction appears on first launch. Tap **ⓘ How to play** at any time to see it again.
+A short, three-step **How to play** introduction appears on first launch. Tap **ⓘ How to play** at any time to see it again. Installation instructions are available in its expandable **Add this game to your phone** section.
 
 ## Features
 
-- **100 ready-to-play mysteries**, built around common toys, household objects, pretend play, snacks, and activities.
+- **100 ready-to-play mysteries**, with varied questions and clue-specific hints, built around common toys, household objects, pretend play, snacks, and activities.
 - **Parent setup mode** shows the objects and secret answer before the hunt.
 - **Child-friendly play mode** hides the clues until they're discovered.
-- **Completion tracking** shows how many mysteries you've finished and lets you undo a completed mystery.
+- **Completion tracking** shows how many mysteries you've finished; **Finish & next mystery** records completion and advances automatically.
 - **Random mystery** prioritizes unfinished games.
 - **Saved progress** via browser `localStorage` on the current device.
 - **Installable PWA** with standalone display and a home-screen icon.
